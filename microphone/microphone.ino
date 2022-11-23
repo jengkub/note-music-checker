@@ -34,6 +34,7 @@ void loop()
   //*****************************************************************
   //Calabration Section
   //*****************************************************************
+  Serial.println("Calabrating. Please do not play any notes during calabration.");
   for (i = 0; i < OFFSETSAMPLES; i++)
   {
     offSet[i] = analogRead(0); //Reads the value from analog pin 0 (A0), quantize it and save it as a real term.
@@ -47,6 +48,16 @@ void loop()
   //Prepare to accept input from A0
   //*****************************************************************
   avgOffSet = round(sumOffSet / OFFSETSAMPLES);
+  Serial.println("Counting down.");
+  delay(1000);  //pause for 1 seconds
+  Serial.println("3");
+  delay(1000);  //pause for 1 seconds
+  Serial.println("2");
+  delay(1000);  //pause for 1 
+  Serial.println("1");
+  delay(1000);  //pause for 1 seconds
+  Serial.println("Play your note!");
+  delay(1000);  //pause for 1/4 second for reaction time
 
   //*****************************************************************
   //Collect SAMPLES samples from A0 with sample period of samplingPeriod
@@ -130,7 +141,7 @@ void loop()
   //*****************************************************************
   if (samplesPerPeriod == 0)
   {
-    Serial.println(signalFrequencyGuess);
+    Serial.println("Hmm..... I am not sure. Are you trying to trick me?");
   }
   else
   { 
@@ -151,7 +162,10 @@ void loop()
 
     //calculate the frequency using the weighting function
     signalFrequencyGuess = ((1/total) * signalFrequency) + ((2/total) * signalFrequency2) + ((3/total) * signalFrequency3); //find a weighted frequency
+    Serial.print("The note you played is approximately ");
     Serial.print(signalFrequencyGuess);     //Print the frequency guess.
+    Serial.println(" Hz.");
+
     //find octave range based on the guess
     octaveRange=3;
     while (!(signalFrequencyGuess >= storedNoteFreq[0]-7 && signalFrequencyGuess <= storedNoteFreq[11]+7 ))
@@ -176,54 +190,59 @@ void loop()
     }
     
     //Print the note
-//    if(noteLocation==0)
-//    { 
-//      Serial.print("C");
-//    }  
-//    else if(noteLocation==1)
-//    {
-//      Serial.print("C#");
-//    }
-//    else if(noteLocation==2)
-//    {
-//      Serial.print("D");
-//    }
-//    else if(noteLocation==3)
-//    {
-//      Serial.print("D#");
-//    }
-//    else if(noteLocation==4)
-//    {
-//      Serial.print("E");
-//    }
-//    else if(noteLocation==5)
-//    {
-//      Serial.print("F");
-//    }
-//    else if(noteLocation==6)
-//    {
-//      Serial.print("F#");
-//    }
-//    else if(noteLocation==7)
-//    {
-//      Serial.print("G");
-//    }
-//    else if(noteLocation==8)
-//    {
-//      Serial.print("G#");
-//    }
-//    else if(noteLocation==9)
-//    {
-//      Serial.print("A");
-//    }
-//    else if(noteLocation==10)
-//    {
-//      Serial.print("A#");
-//    }
-//    else if(noteLocation==11)
-//    {
-//      Serial.print("B");
-//    }
-//    Serial.println(octaveRange);
+    Serial.print("I think you played ");
+    if(noteLocation==0)
+    { 
+      Serial.print("C");
+    }  
+    else if(noteLocation==1)
+    {
+      Serial.print("C#");
+    }
+    else if(noteLocation==2)
+    {
+      Serial.print("D");
+    }
+    else if(noteLocation==3)
+    {
+      Serial.print("D#");
+    }
+    else if(noteLocation==4)
+    {
+      Serial.print("E");
+    }
+    else if(noteLocation==5)
+    {
+      Serial.print("F");
+    }
+    else if(noteLocation==6)
+    {
+      Serial.print("F#");
+    }
+    else if(noteLocation==7)
+    {
+      Serial.print("G");
+    }
+    else if(noteLocation==8)
+    {
+      Serial.print("G#");
+    }
+    else if(noteLocation==9)
+    {
+      Serial.print("A");
+    }
+    else if(noteLocation==10)
+    {
+      Serial.print("A#");
+    }
+    else if(noteLocation==11)
+    {
+      Serial.print("B");
+    }
+    Serial.println(octaveRange);
   }
+  //*****************************************************************
+  //Stop here. Hit reset button on Arduino to restart
+  //*****************************************************************
+  while (1);
 }
