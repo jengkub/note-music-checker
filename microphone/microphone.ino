@@ -48,6 +48,16 @@ void loop()
   //Prepare to accept input from A0
   //*****************************************************************
   avgOffSet = round(sumOffSet / OFFSETSAMPLES);
+  Serial.println("Counting down.");
+  delay(1000);  //pause for 1 seconds
+  Serial.println("3");
+  delay(1000);  //pause for 1 seconds
+  Serial.println("2");
+  delay(1000);  //pause for 1 
+  Serial.println("1");
+  delay(1000);  //pause for 1 seconds
+  Serial.println("Play your note!");
+  delay(1000);  //pause for 1/4 second for reaction time
 
   //*****************************************************************
   //Collect SAMPLES samples from A0 with sample period of samplingPeriod
@@ -234,6 +244,5 @@ void loop()
   //*****************************************************************
   //Stop here. Hit reset button on Arduino to restart
   //*****************************************************************
-  signalFrequencyGuess = 0;
-  delay(500);
+  while (1);
 }
