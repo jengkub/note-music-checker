@@ -57,7 +57,11 @@ void loop()
   Serial.println("1");
   delay(1000);  //pause for 1 seconds
   Serial.println("Play your note!");
+<<<<<<< Updated upstream
   delay(1000);  //pause for 1/4 second for reaction time
+=======
+  delay(250);  //pause for 1/4 second for reaction time
+>>>>>>> Stashed changes
 
   //*****************************************************************
   //Collect SAMPLES samples from A0 with sample period of samplingPeriod
@@ -245,4 +249,8 @@ void loop()
   //Stop here. Hit reset button on Arduino to restart
   //*****************************************************************
   while (1);
+<<<<<<< Updated upstream
 }
+=======
+}
+>>>>>>> Stashed changes
