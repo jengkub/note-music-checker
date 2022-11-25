@@ -31,37 +31,20 @@ void setup()
 
 void loop()
 { 
-  //*****************************************************************
   //Calabration Section
-  //*****************************************************************
-  // Serial.println("Calabrating. Please do not play any notes during calabration.");
   for (i = 0; i < OFFSETSAMPLES; i++)
   {
     offSet[i] = analogRead(0); //Reads the value from analog pin 0 (A0), quantize it and save it as a real term.
-    //Serial.println(offSet[i]); //use this to adjust the sound detection module to approximately half or 512 when no sound is played.
     sumOffSet = sumOffSet + offSet[i];
   }
   samplesPerPeriod = 0;
   maxValue = 0;
   
-  //*****************************************************************
   //Prepare to accept input from A0
-  //*****************************************************************
   avgOffSet = round(sumOffSet / OFFSETSAMPLES);
-  // Serial.println("Counting down.");
-  // delay(1000);  //pause for 1 seconds
-  // Serial.println("3");
-  // delay(1000);  //pause for 1 seconds
-  // Serial.println("2");
-  // delay(1000);  //pause for 1 
-  // Serial.println("1");
-  // delay(1000);  //pause for 1 seconds
-  // Serial.println("Play your note!");
-  // delay(1000);  //pause for 1/4 second for reaction time
 
-  //*****************************************************************
+
   //Collect SAMPLES samples from A0 with sample period of samplingPeriod
-  //*****************************************************************
   samplingPeriod = 1.0 / SAMPLING_FREQUENCY; //Period in microseconds
   for (i = 0; i < SAMPLES; i++)
   {
@@ -71,7 +54,7 @@ void loop()
     /*remaining wait time between samples if necessary in seconds */
     while (micros() < (microSeconds + (samplingPeriod * 1000000)))
     {
-      //do nothing just wait
+
     }
   }
 
@@ -136,12 +119,9 @@ void loop()
     }
   }
 
-  //*****************************************************************
-  //Result Analysis
-  //*****************************************************************
+
   if (samplesPerPeriod == 0)
   {
-    // Serial.println("Hmm..... I am not sure. Are you trying to trick me?");
   }
   else
   { 
@@ -162,9 +142,7 @@ void loop()
 
     //calculate the frequency using the weighting function
     signalFrequencyGuess = ((1/total) * signalFrequency) + ((2/total) * signalFrequency2) + ((3/total) * signalFrequency3); //find a weighted frequency
-    // Serial.print("The note you played is approximately ");
-    // Serial.print(signalFrequencyGuess);     //Print the frequency guess.
-    // Serial.println(" Hz.");
+
 
     //find octave range based on the guess
     octaveRange=3;
@@ -189,7 +167,7 @@ void loop()
       }
     }
     
-    //Print the note
+
     if(noteLocation==0)
     { 
       Serial.print("C");
@@ -245,6 +223,6 @@ void loop()
   //*****************************************************************
   //Stop here. Hit reset button on Arduino to restart
   //*****************************************************************
-  // while (1);
+
 }
 
