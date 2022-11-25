@@ -26,7 +26,7 @@ int samplesPerPeriod = 0;
 
 void setup()
 {
-  Serial.begin(9600); //115200 Baud rate for the Serial Monitor
+  Serial.begin(9600); //9600 Baud rate for the Serial Monitor
 }
 
 void loop()
@@ -225,4 +225,3 @@ void loop()
   //*****************************************************************
 
 }
-
